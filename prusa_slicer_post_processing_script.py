@@ -58,6 +58,7 @@ def makeFullSettingDict(gCodeSettingDict:dict) -> dict:
         "ArcMinPrintSpeed":0.5*60,#Unit:mm/min
         "ArcPrintSpeed":1.5*60, #Unit:mm/min
         "ArcTravelFeedRate":30*60, # slower travel speed, Unit:mm/min
+        "ArcZHopDistance":0.2, #Unit:mm
         "ExtendIntoPerimeter":2.0*gCodeSettingDict.get("perimeter_extrusion_width"), #min=0.5extrusionwidth!, extends the Area for arc generation, put higher to go through small passages. Unit:mm
         "MaxDistanceFromPerimeter":2*gCodeSettingDict.get("perimeter_extrusion_width"),#Control how much bumpiness you allow between arcs and perimeter. lower will follow perimeter better, but create a lot of very small arcs. Should be more that 1 Arcwidth! Unit:mm
         "MinArea":5*10,#Unit:mm2
@@ -884,7 +885,12 @@ def p2GCode(p:Point,E=0,**kwargs)->str:
 def retractGCode(retract=True,kwargs={})->str:
     retractDist=kwargs.get("retract_length",1)
     E= -retractDist if retract else retractDist
-    return f"G1 E{E} F{kwargs.get('retract_speed',2100)}\n"  
+    ZHop = float(kwargs.get("ArcZHopDistance", 0.2)) #Unit mm
+    if (ZHop > 0):        
+        ZHop = ZHop if retract else -ZHop
+        return f"G91\nG1 Z"+ str(ZHop) + "\nG90\n" + "G1 E{E} F{kwargs.get('retract_speed',2100)}\n"  #relative coords -> Zhop -> back to absolute coords -> retract
+    else:
+        return f"G1 E{E} F{kwargs.get('retract_speed',2100)}\n"  
 
 def setFeedRateGCode(F:int)->str:
     return f"G1 F{F}\n"     
