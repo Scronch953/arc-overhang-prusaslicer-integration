@@ -59,7 +59,7 @@ def makeFullSettingDict(gCodeSettingDict:dict) -> dict:
         "ArcPrintSpeed":1.5*60, #Unit:mm/min
         "ArcTravelFeedRate":30*60, # slower travel speed, Unit:mm/min
         "ArcZHopDistance":0.2, #Unit:mm
-        "ExtendIntoPerimeter":2.0*gCodeSettingDict.get("perimeter_extrusion_width"), #min=0.5extrusionwidth!, extends the Area for arc generation, put higher to go through small passages. Unit:mm
+        "ExtendIntoPerimeter":1.0*gCodeSettingDict.get("perimeter_extrusion_width"), #min=0.5extrusionwidth!, extends the Area for arc generation, put higher to go through small passages. Unit:mm
         "MaxDistanceFromPerimeter":2*gCodeSettingDict.get("perimeter_extrusion_width"),#Control how much bumpiness you allow between arcs and perimeter. lower will follow perimeter better, but create a lot of very small arcs. Should be more that 1 Arcwidth! Unit:mm
         "MinArea":5*10,#Unit:mm2
         "MinBridgeLength":5,#Unit:mm
