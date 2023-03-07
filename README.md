@@ -1,3 +1,6 @@
+In this fork: 
+Added Zhops by modifying "retractGCode". This should reduce collisions and scaring of the print. Also, hops are done while briefly switching to relative coordinates and back - this can make GCode visualizers show the arcs detached below the model, even though the printer will print the arcs correctly with the Zhops.
+
 # Arc Overhang
 <p align="center">
 <img src="https://github.com/nicolai-wachenschwan/arc-overhang-prusaslicer-integration/blob/main/examples/ExampleCatchImage.png" width=600>
