@@ -1,4 +1,4 @@
-#In this fork: 
+In this fork: 
 Added Zhops by modifying "retractGCode". This should reduce collisions and scaring of the print. Also, hops are done while briefly switching to relative coordinates and back - this can make GCode visualizers show the arcs detached below the model, even though the printer will print the arcs correctly with the Zhops.
 
 # Arc Overhang
